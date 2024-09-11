@@ -22,5 +22,7 @@ public class Constant {
 
     public static final String DIM_CONFIG_TABLE = "table_process_dim";
 
+    public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
+
 }
 
