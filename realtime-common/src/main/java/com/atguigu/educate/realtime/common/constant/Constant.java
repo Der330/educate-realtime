@@ -1,7 +1,7 @@
 package com.atguigu.educate.realtime.common.constant;
 
 public class Constant {
-    public static final String KAFKA_BROKERS = "hadoop104:9092,hadoop105:9092,hadoop106:9092";
+    public static final String KAFKA_BROKERS = "hadoop104:9092";//hadoop104:9092
 
     public static final String TOPIC_DB = "topic_db";
     public static final String TOPIC_LOG = "topic_log";

@@ -27,7 +27,7 @@ public class FlinkKafkaUtil {
     }
 
 
-    public static KafkaSource<String> getKafkaSource(String topic) {
+    public static KafkaSource<String> getKafkaSource(String topic, String groupId) {
         KafkaSource<String> kafkaSource=KafkaSource.<String>builder()
                 .setBootstrapServers(Constant.KAFKA_BROKERS)
                 .setStartingOffsets(OffsetsInitializer.latest())
@@ -53,7 +53,7 @@ public class FlinkKafkaUtil {
                             }
                         }
                 )
-                .setGroupId(topic)
+                .setGroupId(groupId)
                 .setTopics(topic)
                 .build();
 

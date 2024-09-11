@@ -11,14 +11,18 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 public class DimApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        StreamExecutionEnvironment env=FlinkEnvUtil.getEnv(10010, 4);
+        StreamExecutionEnvironment env=FlinkEnvUtil.getEnv(18080, 4);
 
         DataStreamSource<String> sourceDS=env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.TOPIC_DB), WatermarkStrategy.noWatermarks(), "DimApp");
 
         //转换为JSONObject
         SingleOutputStreamOperator<JSONObject> jsonObjDS=sourceDS.map(JSON::parseObject);
+        jsonObjDS.print();
+
+
+        env.execute();
 
         //
 
