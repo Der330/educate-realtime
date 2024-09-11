@@ -15,7 +15,7 @@ public class DimApp {
 
         StreamExecutionEnvironment env=FlinkEnvUtil.getEnv(18080, 4);
 
-        DataStreamSource<String> sourceDS=env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.TOPIC_DB), WatermarkStrategy.noWatermarks(), "DimApp");
+        DataStreamSource<String> sourceDS=env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.TOPIC_DB,"DimApp"), WatermarkStrategy.noWatermarks(), "DimApp");
 
         //转换为JSONObject
         SingleOutputStreamOperator<JSONObject> jsonObjDS=sourceDS.map(JSON::parseObject);
