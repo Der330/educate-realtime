@@ -20,6 +20,7 @@ public class Constant {
     public static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String MYSQL_URL = "jdbc:mysql://hadoop102:3306?useSSL=false";
 
+    public static final String DIM_CONFIG_TABLE = "table_process_dim";
 
 }
 
