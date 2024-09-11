@@ -7,7 +7,7 @@ public class Constant {
     public static final String TOPIC_LOG = "topic_log";
 
     public static final String DORIS_FE_NODES = "8.130.101.83:9030";//hadoop107:7030  localhost:10000    8.130.101.83:7030
-    public static final String DORIS_DATABASE = "educate-realtime";
+    public static final String DORIS_DATABASE = "educate_realtime";
     public static final String DORIS_PASSWORD = "educate-realtime0318";
 
 
