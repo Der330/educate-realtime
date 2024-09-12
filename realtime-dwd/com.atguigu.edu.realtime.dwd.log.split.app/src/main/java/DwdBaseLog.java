@@ -231,7 +231,7 @@ public class DwdBaseLog {
         DataStreamSink<String> actionTag1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("actionTag"));
         SideOutputDataStream<String> appVideoLog = LogDS.getSideOutput(appVideo);
         DataStreamSink<String> appVideo1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("appVideo"));
-        DataStreamSink<String> pageTag = LogDS.sinkTo(FlinkSinkUtil.getKafkaSink("pageTag"));
+        LogDS.sinkTo(FlinkSinkUtil.getKafkaSink("pageTag"));
 
         // TODO 提交作业
         env.execute();
