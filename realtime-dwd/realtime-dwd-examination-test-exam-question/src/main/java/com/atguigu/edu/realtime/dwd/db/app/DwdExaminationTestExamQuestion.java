@@ -1,4 +1,4 @@
-package com.atguigu.gmall.realtime.dwd.db.app;
+package com.atguigu.edu.realtime.dwd.db.app;
 
 import com.atguigu.educate.realtime.common.constant.Constant;
 import com.atguigu.educate.realtime.common.util.FlinkEnvUtil;

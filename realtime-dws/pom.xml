@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>realtime-dws-interaction-course-review-window</module>
+        <module>realtime-dws-interaction-paper-test-window</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>
