@@ -1,4 +1,4 @@
-
+package com.atguigu.edu.realtime.dwd.log.app;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
