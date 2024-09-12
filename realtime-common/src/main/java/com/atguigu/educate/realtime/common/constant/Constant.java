@@ -10,9 +10,10 @@ public class Constant {
     public static final String DORIS_DATABASE = "educate_realtime";
     public static final String DORIS_PASSWORD = "educate-realtime0318";
 
-
-    public static final String MYSQL_HOST = "hadoop102";
-    public static final int MYSQL_PORT = 3306;
+    public static final String HABSE_ZOOKEEPER_QUORUM = "hadoop104,hadoop105,hadoop106";
+    public static final String HABSE_ROOTDIR = "hdfs://hadoop102:8020/hbase";
+    public static final String MYSQL_HOST = "hadoop102";//hadoop102
+    public static final int MYSQL_PORT = 3306;//3306
     public static final String MYSQL_USER_NAME = "root";
     public static final String MYSQL_PASSWORD = "000000";
     public static final String HBASE_NAMESPACE = "educate";
