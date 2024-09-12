@@ -22,8 +22,8 @@ public class HbaseUtil {
     public static Connection getHbaseConnect() throws IOException {
 
         Configuration conf=HBaseConfiguration.create();
-        conf.set("hbase.zookeeper.quorum","hadoop102,hadoop103,hadoop104");
-        conf.set("hbase.rootdir","hdfs://hadoop102:8020/hbase");
+        conf.set("hbase.zookeeper.quorum",Constant.HABSE_ZOOKEEPER_QUORUM);
+        conf.set("hbase.rootdir",Constant.HABSE_ROOTDIR);
 
         Connection connection=ConnectionFactory.createConnection(conf);
 
@@ -43,7 +43,7 @@ public class HbaseUtil {
     public static AsyncConnection getHBaseAsyncConnection(){
         try {
             Configuration conf = new Configuration();
-            conf.set("hbase.zookeeper.quorum","hadoop102,hadoop103,hadoop104");
+            conf.set("hbase.zookeeper.quorum",Constant.HABSE_ZOOKEEPER_QUORUM);
             AsyncConnection asyncHBaseConn = ConnectionFactory.createAsyncConnection(conf).get();
             return asyncHBaseConn;
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class HbaseUtil {
             TableName tableNameObj=TableName.valueOf(nameSpace, tableName);
 
             if (admin.tableExists(tableNameObj)) {
-                new RuntimeException("[CREATE HBASE ERROR]--Hbase命名空间\""+nameSpace+"\"中\""+tableName+"\"表已存在");
+                System.out.println("[CREATE HBASE ERROR]--Hbase命名空间\""+nameSpace+"\"中\""+tableName+"\"表已存在");
             }
 
             if (colFamilys.length<1){

@@ -6,12 +6,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-/**
- * @Author: 刘大大
- * @CreateTime: 2024/9/12  14:12
- */
-
-
 public class DateFormatUtil {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter dtfForPartition = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -19,6 +13,7 @@ public class DateFormatUtil {
 
     /**
      * 2023-07-05 01:01:01 转成 ms 值
+     *
      * @param dateTime
      * @return
      */
@@ -29,6 +24,7 @@ public class DateFormatUtil {
 
     /**
      * 把毫秒值转成 年月日:  2023-07-05
+     *
      * @param ts
      * @return
      */
@@ -40,6 +36,7 @@ public class DateFormatUtil {
 
     /**
      * 把毫秒值转成 年月日时分秒:  2023-07-05 01:01:01
+     *
      * @param ts
      * @return
      */
@@ -57,6 +54,7 @@ public class DateFormatUtil {
 
     /**
      * 把 年月日转成 ts
+     *
      * @param date
      * @return
      */
