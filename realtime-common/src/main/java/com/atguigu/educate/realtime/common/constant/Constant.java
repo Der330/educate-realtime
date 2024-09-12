@@ -11,6 +11,13 @@ public class Constant {
     public static final String DORIS_PASSWORD = "educate-realtime0318";
 
 
+    public static final String TOPIC_DWD_TRAFFIC_START = "dwd_traffic_start";
+    public static final String TOPIC_DWD_TRAFFIC_ERR = "dwd_traffic_err";
+    public static final String TOPIC_DWD_TRAFFIC_PAGE = "dwd_traffic_page";
+    public static final String TOPIC_DWD_TRAFFIC_ACTION = "dwd_traffic_action";
+    public static final String TOPIC_DWD_TRAFFIC_DISPLAY = "dwd_traffic_display";
+
+
     public static final String MYSQL_HOST = "hadoop102";
     public static final int MYSQL_PORT = 3306;
     public static final String MYSQL_USER_NAME = "root";
