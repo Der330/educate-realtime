@@ -28,5 +28,11 @@ public class Constant {
 
     public static final String DWS_INTERACTION_COURSE_REVIEW_WINDOW = "dws_interaction_course_review_window";
 
+    public static final String TOPIC_DWD_TRADE_CART_ADD = "dwd_trade_cart_add";
+
+    public static final String TOPIC_DWD_TRADE_ORDER_DETAIL = "dwd_trade_order_detail";
+
+    public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS = "dwd_trade_order_payment_success";
+
 }
 
