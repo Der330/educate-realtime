@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class FlinkDorisUtil {
-    private static DorisSink<String> getDorisSink(String tableName){
+    public static DorisSink<String> getDorisSink(String tableName){
 
         Properties props = new Properties();
         props.setProperty("format", "json");
