@@ -24,5 +24,7 @@ public class Constant {
 
     public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
 
+    public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
+
 }
 

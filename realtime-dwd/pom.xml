@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>realtime-dwd-interaction-review-info</module>
+        <module>realtime-dwd-examination-test-exam-question</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>
