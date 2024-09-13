@@ -18,6 +18,13 @@
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-interaction-review-info/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-examination-test-exam-question/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-user-logininfo/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-is_new-page-view-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-course-course-order-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-course-test-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-paper-score-level-test-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-paper-test-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-question-test-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-winwod/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

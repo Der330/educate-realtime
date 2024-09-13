@@ -5,6 +5,7 @@ public class Constant {
 
     public static final String TOPIC_DB = "topic_db";
     public static final String TOPIC_LOG = "topic_log";
+    public static final String TOPIC_START_TAG = "topic_start_tag";
 
     public static final String DORIS_FE_NODES = "8.130.101.83:7030";//hadoop107:7030  localhost:10000    8.130.101.83:7030
     public static final String DORIS_DATABASE = "educate_realtime";
@@ -24,6 +25,7 @@ public class Constant {
     public static final String DIM_CONFIG_TABLE = "table_process_dim";
 
     public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
+    public static final String DWD_USER_LOGIN_INFO = "dwd_user_login_info";
 
     public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
 

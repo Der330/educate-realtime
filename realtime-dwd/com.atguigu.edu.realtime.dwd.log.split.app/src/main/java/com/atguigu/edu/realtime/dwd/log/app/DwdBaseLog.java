@@ -222,17 +222,16 @@ public class DwdBaseLog {
 
         // TODO 将不同流的数据写到kafka主题
         SideOutputDataStream<String> startLog = LogDS.getSideOutput(startTag);
-        DataStreamSink<String> startTag1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("startTag"));
+        startLog.sinkTo(FlinkSinkUtil.getKafkaSink("startTag"));
         SideOutputDataStream<String> errTagLog = LogDS.getSideOutput(errTag);
-        DataStreamSink<String> errTag1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("errTag"));
+        errTagLog.sinkTo(FlinkSinkUtil.getKafkaSink("errTag"));
         SideOutputDataStream<String> displayTagLog = LogDS.getSideOutput(displayTag);
-        DataStreamSink<String> displayTag1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("displayTag"));
+        displayTagLog.sinkTo(FlinkSinkUtil.getKafkaSink("displayTag"));
         SideOutputDataStream<String> actionTagLog = LogDS.getSideOutput(actionTag);
-        DataStreamSink<String> actionTag1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("actionTag"));
+        actionTagLog.sinkTo(FlinkSinkUtil.getKafkaSink("actionTag"));
         SideOutputDataStream<String> appVideoLog = LogDS.getSideOutput(appVideo);
-        DataStreamSink<String> appVideo1 = startLog.sinkTo(FlinkSinkUtil.getKafkaSink("appVideo"));
+        appVideoLog.sinkTo(FlinkSinkUtil.getKafkaSink("appVideo"));
         LogDS.sinkTo(FlinkSinkUtil.getKafkaSink("pageTag"));
-
         // TODO 提交作业
         env.execute();
     }
