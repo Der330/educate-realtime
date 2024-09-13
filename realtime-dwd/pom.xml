@@ -3,11 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>realtime-dwd-interaction-review-info</module>
-        <module>realtime-dwd-examination-test-exam-question</module>
-    </modules>
+
     <parent>
         <groupId>com.atguigu</groupId>
         <artifactId>educate-realtime</artifactId>
@@ -15,6 +11,15 @@
     </parent>
 
     <artifactId>realtime-dwd</artifactId>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>realtime-dwd-interaction-review-info</module>
+        <module>realtime-dwd-examination-test-exam-question</module>
+        <module>realtime-dwd-trade-comment-into</module>
+        <module>realtime-dwd-trade-order-detail</module>
+        <module>realtime-dwd-trade-order-pay-suc-detail</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

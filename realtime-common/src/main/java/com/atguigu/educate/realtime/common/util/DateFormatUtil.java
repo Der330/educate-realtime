@@ -61,4 +61,25 @@ public class DateFormatUtil {
     public static long dateToTs(String date) {
         return dateTimeToTs(date + " 00:00:00");
     }
+
+
+    /**
+     * 把 求两个日期的天数差
+     *
+     * @param date1,date2
+     * @return
+     */
+    public static long getDateCutOfDays(String date1, String date2) {
+        Long ts1=dateTimeToTs(date1 + " 00:00:00");
+        Long ts2=dateTimeToTs(date2 + " 00:00:00");
+
+        // 计算时间戳差值
+        long diffInMillis = Math.abs(ts1 - ts2);
+
+        // 将差值转换为天数（1天 = 86400000毫秒）
+        return diffInMillis / (24 * 60 * 60 * 1000);
+
+    }
+
+
 }

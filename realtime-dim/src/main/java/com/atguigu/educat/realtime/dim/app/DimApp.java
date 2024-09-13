@@ -99,25 +99,42 @@ public class DimApp {
                 return tableProcessDim;
             }
         })
-        .map( tableProcessDim -> {
-            Connection hbaseConnect=HbaseUtil.getHbaseConnect();
-            String op=tableProcessDim.getOp();
-            String sinkTable=tableProcessDim.getSinkTable();
-            String[] colFamilys=tableProcessDim.getSinkFamily().split(",");
-            if ("c".equals(op) || "r".equals(op)) {
-                System.out.println("创建表");
-                HbaseUtil.createHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable, colFamilys);
-            }
-            if ("d".equals(op)) {
-                HbaseUtil.dropHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable);
-            }
-            if ("u".equals(op)) {
-                HbaseUtil.dropHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable);
-                HbaseUtil.createHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable, colFamilys);
-            }
-            return tableProcessDim;
+        .map(
+                new RichMapFunction<TableProcessDim, TableProcessDim>() {
+                    Connection hbaseConnect;
 
-        });
+                    @Override
+                    public void open(Configuration parameters) throws Exception {
+                        hbaseConnect=HbaseUtil.getHbaseConnect();
+                    }
+
+                    @Override
+                    public void close() throws Exception {
+                        HbaseUtil.closeHbaseConnect(hbaseConnect);
+                    }
+
+                    @Override
+                    public TableProcessDim map(TableProcessDim tableProcessDim) throws Exception {
+
+
+                        String op=tableProcessDim.getOp();
+                        String sinkTable=tableProcessDim.getSinkTable();
+                        String[] colFamilys=tableProcessDim.getSinkFamily().split(",");
+                        if ("c".equals(op) || "r".equals(op)) {
+                            System.out.println("创建表");
+                            HbaseUtil.createHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable, colFamilys);
+                        }
+                        if ("d".equals(op)) {
+                            HbaseUtil.dropHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable);
+                        }
+                        if ("u".equals(op)) {
+                            HbaseUtil.dropHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable);
+                            HbaseUtil.createHbaseTable(hbaseConnect, Constant.HBASE_NAMESPACE, sinkTable, colFamilys);
+                        }
+                        return tableProcessDim;
+                    }
+                }
+        );
 
 
         //创建广播流
