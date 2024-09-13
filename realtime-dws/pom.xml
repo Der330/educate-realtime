@@ -10,6 +10,7 @@
         <module>realtime-dws-examination-question-test-window</module>
         <module>realtime-dws-examination-course-test-window</module>
         <module>realtime-dws-examination-paper-score-level-test-window</module>
+        <module>realtime-dws-user-page-window</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>

@@ -22,6 +22,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-user-logininfo/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-interaction-paper-test-window/pom.xml" />
       </set>
     </option>
