@@ -5,7 +5,6 @@ public class Constant {
 
     public static final String TOPIC_DB = "topic_db";
     public static final String TOPIC_LOG = "topic_log";
-    public static final String TOPIC_START_TAG = "topic_start_tag";
 
     public static final String DORIS_FE_NODES = "8.130.101.83:7030";//hadoop107:7030  localhost:10000    8.130.101.83:7030
     public static final String DORIS_DATABASE = "educate_realtime";
@@ -25,11 +24,25 @@ public class Constant {
     public static final String DIM_CONFIG_TABLE = "table_process_dim";
 
     public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
-    public static final String DWD_USER_LOGIN_INFO = "dwd_user_login_info";
 
     public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
+    public static final String DWD_USER_LOGIN_INFO = "dws_user_login_info";
 
-    public static final String DWS_INTERACTION_COURSE_REVIEW_WINDOW = "dws_interaction_course_review_window";
 
+    public static final String TOPIC_DWD_TRADE_CART_ADD = "dwd_trade_cart_add";
+
+    public static final String TOPIC_DWD_TRADE_ORDER_DETAIL = "dwd_trade_order_detail";
+
+    public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS = "dwd_trade_order_payment_success";
+
+    public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
+
+    public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
+
+    public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
+
+    public static final String TOPIC_START_TAG = "startTag";
+    public static final String TOPIC_PAGE_TAG = "pageTag";
+    public static final String TOPIC_APP_VIDEO = "appVideo";
 }
 
