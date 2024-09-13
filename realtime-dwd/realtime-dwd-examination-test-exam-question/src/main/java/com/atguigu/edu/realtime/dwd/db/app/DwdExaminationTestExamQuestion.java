@@ -7,10 +7,13 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
+import java.time.Duration;
+
 public class DwdExaminationTestExamQuestion {
     public static void main(String[] args) {
         StreamExecutionEnvironment env = FlinkEnvUtil.getEnv(10011, 4);
         StreamTableEnvironment tabEnv = StreamTableEnvironment.create(env);
+        tabEnv.getConfig().setIdleStateRetention(Duration.ofSeconds(5));
         tabEnv.executeSql(SqlUtil.readOdsDbSql(Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION));
         Table testExamQuestion = tabEnv.sqlQuery("select \n" +
                 "`data`['exam_id'] exam_id,\n" +
@@ -29,27 +32,17 @@ public class DwdExaminationTestExamQuestion {
                 "from topic_db\n" +
                 "where `type`='insert' and `table` = 'test_exam'");
         tabEnv.createTemporaryView("test_exam", testExam);
-        Table testPaper = tabEnv.sqlQuery("select \n" +
-                "`data`['id'] paper_id,\n" +
-                "`data`['paper_title'] paper_title,\n" +
-                "`data`['course_id'] course_id\n" +
-                "from topic_db\n" +
-                "where `type`='insert' and `table` = 'test_paper'");
-        tabEnv.createTemporaryView("test_paper", testPaper);
         Table dwdExaminationTestExamQuestion = tabEnv.sqlQuery("select\n" +
                 "user_id,\n" +
                 "question_id,\n" +
                 "q.exam_id,\n" +
                 "exam_score,\n" +
                 "exam_duration_sec,\n" +
-                "q.paper_id,\n" +
-                "paper_title,\n" +
-                "course_id,\n" +
+                "paper_id,\n" +
                 "is_correct,\n" +
                 "ts\n" +
                 "from test_exam_question q\n" +
-                "join test_exam e on q.exam_id=e.exam_id\n" +
-                "join test_paper p on q.paper_id=p.paper_id");
+                "join test_exam e on q.exam_id=e.exam_id");
         tabEnv.executeSql("create table " + Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION + "(\n" +
                 "user_id string,\n" +
                 "question_id string,\n" +
@@ -57,8 +50,6 @@ public class DwdExaminationTestExamQuestion {
                 "exam_score string,\n" +
                 "exam_duration_sec string,\n" +
                 "paper_id string,\n" +
-                "paper_title string,\n" +
-                "course_id string,\n" +
                 "is_correct string,\n" +
                 "ts bigint,\n" +
                 "primary key(user_id) not enforced " +

@@ -24,5 +24,8 @@ public class DwsExaminationCourseTestBean {
     String userId;
 
     @JSONField(serialize = false)
+    String paperId;
+
+    @JSONField(serialize = false)
     Long ts;
 }

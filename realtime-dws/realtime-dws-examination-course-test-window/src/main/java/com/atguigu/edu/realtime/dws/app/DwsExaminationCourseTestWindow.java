@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class DwsExaminationCourseTestWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = FlinkEnvUtil.getEnv(10101, 4);
-        SingleOutputStreamOperator<DwsExaminationCourseTestBean> reduceDS = env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION, Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW)
+        SingleOutputStreamOperator<DwsExaminationCourseTestBean> processDS = env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION, Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW)
                         , WatermarkStrategy.noWatermarks(), Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW)
                 .process(new ProcessFunction<String, DwsExaminationCourseTestBean>() {
                     @Override
@@ -44,7 +44,7 @@ public class DwsExaminationCourseTestWindow {
                             JSONObject jsonObj = JSON.parseObject(s);
                             collector.collect(DwsExaminationCourseTestBean.builder()
                                     .userId(jsonObj.getString("user_id"))
-                                    .courseId(jsonObj.getString("course_id"))
+                                    .paperId(jsonObj.getString("paper_id"))
                                     .scoreSum(jsonObj.getBigDecimal("exam_score"))
                                     .durationSum(jsonObj.getLong("exam_duration_sec"))
                                     .ts(jsonObj.getLong("ts") * 1000)
@@ -52,7 +52,23 @@ public class DwsExaminationCourseTestWindow {
                                     .build());
                         }
                     }
-                })
+                });
+        SingleOutputStreamOperator<DwsExaminationCourseTestBean> reduceDS = AsyncDataStream.unorderedWait(processDS, new DimAsyncFunction<DwsExaminationCourseTestBean>() {
+                    @Override
+                    public void addDims(DwsExaminationCourseTestBean dwsExaminationCourseTestBean, JSONObject jsonObj) {
+                        dwsExaminationCourseTestBean.setCourseId(jsonObj.getString("course_id"));
+                    }
+
+                    @Override
+                    public String getTableName() {
+                        return "dim_test_paper";
+                    }
+
+                    @Override
+                    public String getRowKey(DwsExaminationCourseTestBean dwsExaminationCourseTestBean) {
+                        return dwsExaminationCourseTestBean.getPaperId();
+                    }
+                }, 60, TimeUnit.SECONDS)
                 .assignTimestampsAndWatermarks(WatermarkStrategy.<DwsExaminationCourseTestBean>forMonotonousTimestamps()
                         .withTimestampAssigner(new SerializableTimestampAssigner<DwsExaminationCourseTestBean>() {
                             @Override
@@ -60,7 +76,7 @@ public class DwsExaminationCourseTestWindow {
                                 return dwsExaminationCourseTestBean.getTs();
                             }
                         }))
-                .keyBy(DwsExaminationCourseTestBean::getUserId)
+                .keyBy(bean -> bean.getUserId() + bean.getCourseId())
                 .process(new KeyedProcessFunction<String, DwsExaminationCourseTestBean, DwsExaminationCourseTestBean>() {
                     ValueState<String> lastDateState;
 
