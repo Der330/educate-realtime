@@ -37,6 +37,7 @@ public class Constant {
     public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
     public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
 
+    public static final String test = " ";
 
 }
 
