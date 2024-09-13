@@ -199,6 +199,7 @@ public class DimApp {
 
                             JSONObject data=jsonObject.getJSONObject("data");
                             String type=jsonObject.getString("type");
+                            String rowKay=data.getString(tableProcessDim.getSinkRowKey());
 
 
                             //判断维度表数据操作类型
@@ -221,7 +222,7 @@ public class DimApp {
                                         Constant.HBASE_NAMESPACE,
                                         tableProcessDim.getSinkTable(),
                                         tableProcessDim.getSinkFamily(),
-                                        tableProcessDim.getSinkRowKey(),
+                                        rowKay,
                                         colObj
                                 );
                             }
