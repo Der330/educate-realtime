@@ -15,6 +15,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dim/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-interaction-review-info/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-examination-test-exam-question/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-user-logininfo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
