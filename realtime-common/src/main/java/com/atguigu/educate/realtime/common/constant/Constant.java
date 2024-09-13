@@ -35,5 +35,9 @@ public class Constant {
 
     public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS = "dwd_trade_order_payment_success";
 
+    public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
+
+    public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
+
 }
 

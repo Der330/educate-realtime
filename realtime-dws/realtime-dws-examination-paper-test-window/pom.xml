@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>realtime-dws-interaction-paper-test-window</artifactId>
-
+    <artifactId>realtime-dws-examination-paper-test-window</artifactId>
 
 </project>

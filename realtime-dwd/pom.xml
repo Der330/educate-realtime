@@ -7,6 +7,9 @@
     <modules>
         <module>realtime-dwd-interaction-review-info</module>
         <module>realtime-dwd-examination-test-exam-question</module>
+        <module>realtime-dwd-trade-comment-into</module>
+        <module>realtime-dwd-trade-order-detail</module>
+        <module>realtime-dwd-trade-order-pay-suc-detail</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>
@@ -15,12 +18,6 @@
     </parent>
 
     <artifactId>realtime-dwd</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>realtime-dwd-trade-comment-into</module>
-        <module>realtime-dwd-trade-order-detail</module>
-        <module>realtime-dwd-trade-order-pay-suc-detail</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

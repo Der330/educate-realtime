@@ -17,6 +17,11 @@
         <option value="$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-interaction-paper-test-window/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">

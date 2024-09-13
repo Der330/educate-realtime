@@ -30,7 +30,7 @@ public class FlinkKafkaUtil {
     public static KafkaSource<String> getKafkaSource(String topic, String groupId) {
         KafkaSource<String> kafkaSource=KafkaSource.<String>builder()
                 .setBootstrapServers(Constant.KAFKA_BROKERS)
-                .setStartingOffsets(OffsetsInitializer.earliest())
+                .setStartingOffsets(OffsetsInitializer.latest())
                 .setValueOnlyDeserializer(new SimpleStringSchema())
                 .setValueOnlyDeserializer(
                         new DeserializationSchema<String>() {
