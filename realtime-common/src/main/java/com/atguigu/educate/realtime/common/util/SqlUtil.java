@@ -12,6 +12,7 @@ public class SqlUtil {
                 "  'properties.bootstrap.servers' = '"+ Constant.KAFKA_BROKERS +"',\n" +
                 "  'properties.group.id' = '"+groupId+"',\n" +
                 "  'scan.startup.mode' = 'latest-offset',\n" +
+                //"  'scan.startup.mode' = 'earliest-offset',\n" +
                 "  'format' = 'json'\n" +
                 ")";
         return sql;
