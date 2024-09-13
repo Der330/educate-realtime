@@ -3,7 +3,6 @@ package com.atguigu.edu.realtime.dws.app;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.educate.realtime.common.bean.DwsExaminationCourseTestBean;
-import com.atguigu.educate.realtime.common.bean.DwsInteractionCourseReviewBean;
 import com.atguigu.educate.realtime.common.constant.Constant;
 import com.atguigu.educate.realtime.common.function.DimAsyncFunction;
 import com.atguigu.educate.realtime.common.test.BeanToJsonStrMapFunction;
