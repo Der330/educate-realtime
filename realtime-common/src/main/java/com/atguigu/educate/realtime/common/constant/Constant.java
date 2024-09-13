@@ -25,11 +25,17 @@ public class Constant {
     public static final String DIM_CONFIG_TABLE = "table_process_dim";
 
     public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
+
     public static final String DWD_USER_LOGIN_INFO = "dwd_user_login_info";
 
     public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
 
     public static final String DWS_INTERACTION_COURSE_REVIEW_WINDOW = "dws_interaction_course_review_window";
+    public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
+    public static final String DWS_EXAMINATION_QUESTION_TEST_WINDOW = "dws_examination_question_test_window";
+
+    public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
+    public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
 
 }
 
