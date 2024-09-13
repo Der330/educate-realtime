@@ -48,6 +48,9 @@ public class DwsCourseCourseOrderWindow {
                                     .orderCt(1L)
                                     .orderAmount(jsonObj.getBigDecimal("final_amount"))
                                     .ts(jsonObj.getLong("ts") * 1000)
+                                    .courseUserCt(0L)
+                                    .subjectUserCt(0L)
+                                    .categoryUserCt(0L)
                                     .build());
                         }
                     }

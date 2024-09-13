@@ -40,7 +40,6 @@ public class DwdBaseLog {
     private static final String PAGE = "page";
 
 
-
     public static void main(String[] args) throws Exception {
         //TODO 设置流处理环境 以及端口号和并行度
         StreamExecutionEnvironment env = FlinkEnvUtil.getEnv(18001, 4);
@@ -131,11 +130,16 @@ public class DwdBaseLog {
         );
         fixedDS.print("fixedDS");
         //TODO 分流 将不同类型的日志放到不同的流
-        OutputTag<String> errTag = new OutputTag<String>("errTag"){};
-        OutputTag<String> startTag = new OutputTag<String>("startTag"){};
-        OutputTag<String> displayTag = new OutputTag<String>("displayTag"){};
-        OutputTag<String> actionTag = new OutputTag<String>("actionTag"){};
-        OutputTag<String> appVideo = new OutputTag<String>("appVideo"){};
+        OutputTag<String> errTag = new OutputTag<String>("errTag") {
+        };
+        OutputTag<String> startTag = new OutputTag<String>("startTag") {
+        };
+        OutputTag<String> displayTag = new OutputTag<String>("displayTag") {
+        };
+        OutputTag<String> actionTag = new OutputTag<String>("actionTag") {
+        };
+        OutputTag<String> appVideo = new OutputTag<String>("appVideo") {
+        };
 
         SingleOutputStreamOperator<String> LogDS = fixedDS.process(
                 new ProcessFunction<JSONObject, String>() {
@@ -179,7 +183,6 @@ public class DwdBaseLog {
                             }
                             //~~~动作日志~~~
                             JSONArray actionArr = jsonObj.getJSONArray("actions");
-                            JSONObject appVideo1 = jsonObj.getJSONObject("appVideo");
                             if (actionArr != null && actionArr.size() > 0) {
                                 //遍历出当前页面上的所有动作
                                 for (int i = 0; i < actionArr.size(); i++) {
@@ -195,19 +198,17 @@ public class DwdBaseLog {
                             }
                             //~~~视频播放日志~~
                             JSONObject appVideo2 = jsonObj.getJSONObject("appVideo");
-                            if (displayArr != null && displayArr.size() > 0) {
+                            if (appVideo2 != null) {
                                 //遍历出所有曝光数据
-                                for (int i = 0; i < displayArr.size(); i++) {
-                                    JSONObject displayJsonObj = displayArr.getJSONObject(i);
-                                    //定义一个新的json，用于封装当前遍历出来的曝光数据
-                                    JSONObject newDisplayJsonObj = new JSONObject();
-                                    newDisplayJsonObj.put("common", commonJsonObj);
-                                    newDisplayJsonObj.put("page", pageJsonObj);
-                                    newDisplayJsonObj.put("ts", ts);
-                                    newDisplayJsonObj.put("appVideo", displayJsonObj);
-                                    //将曝光数据写到曝光侧输出流中
-                                    ctx.output(appVideo, newDisplayJsonObj.toJSONString());
-                                }
+                                //定义一个新的json，用于封装当前遍历出来的曝光数据
+                                JSONObject newDisplayJsonObj = new JSONObject();
+                                newDisplayJsonObj.put("common", commonJsonObj);
+                                newDisplayJsonObj.put("page", pageJsonObj);
+                                newDisplayJsonObj.put("ts", ts);
+                                newDisplayJsonObj.put("appVideo", appVideo2);
+                                //将曝光数据写到曝光侧输出流中
+                                ctx.output(appVideo, newDisplayJsonObj.toJSONString());
+
                                 jsonObj.remove("appVideo");
                             }
 

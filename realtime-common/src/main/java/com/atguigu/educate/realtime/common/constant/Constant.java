@@ -29,12 +29,12 @@ public class Constant {
     public static final String DWD_USER_LOGIN_INFO = "dwd_user_login_info";
 
     public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
-    public static final String DWD_USER_LOGIN_INFO = "dws_user_login_info";
-
 
     public static final String TOPIC_DWD_TRADE_CART_ADD = "dwd_trade_cart_add";
 
     public static final String TOPIC_DWD_TRADE_ORDER_DETAIL = "dwd_trade_order_detail";
+
+    public static final String DWS_COURSE_COURSE_ORDER_WINDOW = "dws_course_course_order_window";
 
     public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS = "dwd_trade_order_payment_success";
 
@@ -43,16 +43,8 @@ public class Constant {
     public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
     public static final String DWS_EXAMINATION_QUESTION_TEST_WINDOW = "dws_examination_question_test_window";
 
-    public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
     public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
 
-    public static final String test = " ";
-
-    public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
-
-    public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
-
-    public static final String TOPIC_START_TAG = "startTag";
     public static final String TOPIC_PAGE_TAG = "pageTag";
     public static final String TOPIC_APP_VIDEO = "appVideo";
 }
