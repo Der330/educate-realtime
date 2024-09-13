@@ -2,7 +2,7 @@ package com.atguigu.edu.realtime.dws.app;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.educate.realtime.common.bean.DwsExaminationPaperTestBean;
+import com.atguigu.educate.realtime.common.bean.DwsExaminationPaperScoreLevelTestBean;
 import com.atguigu.educate.realtime.common.constant.Constant;
 import com.atguigu.educate.realtime.common.test.BeanToJsonStrMapFunction;
 import com.atguigu.educate.realtime.common.util.DateFormatUtil;
@@ -26,37 +26,38 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
-public class DwsExaminationPaperTestWindow {
+import java.math.BigDecimal;
+
+public class DwsExaminationPaperScoreLevelTestWindow {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = FlinkEnvUtil.getEnv(10101, 4);
-        env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION, Constant.DWS_EXAMINATION_PAPER_TEST_WINDOW)
-                        , WatermarkStrategy.noWatermarks(), Constant.DWS_EXAMINATION_PAPER_TEST_WINDOW)
-                .process(new ProcessFunction<String, DwsExaminationPaperTestBean>() {
+        env.fromSource(FlinkKafkaUtil.getKafkaSource(Constant.DWD_EXAMINATION_TEST_EXAM_QUESTION, Constant.DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW)
+                        , WatermarkStrategy.noWatermarks(), Constant.DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW)
+                .process(new ProcessFunction<String, DwsExaminationPaperScoreLevelTestBean>() {
                     @Override
-                    public void processElement(String s, ProcessFunction<String, DwsExaminationPaperTestBean>.Context context, Collector<DwsExaminationPaperTestBean> collector) throws Exception {
+                    public void processElement(String s, ProcessFunction<String, DwsExaminationPaperScoreLevelTestBean>.Context context, Collector<DwsExaminationPaperScoreLevelTestBean> collector) throws Exception {
                         if (StringUtils.isNotEmpty(s)) {
                             JSONObject jsonObj = JSON.parseObject(s);
-                            collector.collect(DwsExaminationPaperTestBean.builder()
+                            collector.collect(DwsExaminationPaperScoreLevelTestBean.builder()
                                     .userId(jsonObj.getString("user_id"))
                                     .paperId(jsonObj.getString("paper_id"))
                                     .paperTitle(jsonObj.getString("paper_title"))
-                                    .scoreSum(jsonObj.getBigDecimal("exam_score"))
-                                    .durationSum(jsonObj.getLong("exam_duration_sec"))
+                                    .scoreLevel(jsonObj.getBigDecimal("exam_score").compareTo(BigDecimal.valueOf(60)) >= 0 ? "及格" : "不及格")
                                     .ts(jsonObj.getLong("ts") * 1000)
                                     .UserCt(0L)
                                     .build());
                         }
                     }
                 })
-                .assignTimestampsAndWatermarks(WatermarkStrategy.<DwsExaminationPaperTestBean>forMonotonousTimestamps()
-                        .withTimestampAssigner(new SerializableTimestampAssigner<DwsExaminationPaperTestBean>() {
+                .assignTimestampsAndWatermarks(WatermarkStrategy.<DwsExaminationPaperScoreLevelTestBean>forMonotonousTimestamps()
+                        .withTimestampAssigner(new SerializableTimestampAssigner<DwsExaminationPaperScoreLevelTestBean>() {
                             @Override
-                            public long extractTimestamp(DwsExaminationPaperTestBean dwsExaminationPaperTestBean, long l) {
-                                return dwsExaminationPaperTestBean.getTs();
+                            public long extractTimestamp(DwsExaminationPaperScoreLevelTestBean dwsExaminationPaperScoreLevelTestBean, long l) {
+                                return dwsExaminationPaperScoreLevelTestBean.getTs();
                             }
                         }))
-                .keyBy(bean -> bean.getUserId() + bean.getPaperId())
-                .process(new KeyedProcessFunction<String, DwsExaminationPaperTestBean, DwsExaminationPaperTestBean>() {
+                .keyBy(DwsExaminationPaperScoreLevelTestBean::getUserId)
+                .process(new KeyedProcessFunction<String, DwsExaminationPaperScoreLevelTestBean, DwsExaminationPaperScoreLevelTestBean>() {
                     ValueState<String> lastDateState;
 
                     @Override
@@ -67,30 +68,28 @@ public class DwsExaminationPaperTestWindow {
                     }
 
                     @Override
-                    public void processElement(DwsExaminationPaperTestBean dwsExaminationPaperTestBean, KeyedProcessFunction<String, DwsExaminationPaperTestBean, DwsExaminationPaperTestBean>.Context context, Collector<DwsExaminationPaperTestBean> collector) throws Exception {
+                    public void processElement(DwsExaminationPaperScoreLevelTestBean dwsExaminationPaperScoreLevelTestBean, KeyedProcessFunction<String, DwsExaminationPaperScoreLevelTestBean, DwsExaminationPaperScoreLevelTestBean>.Context context, Collector<DwsExaminationPaperScoreLevelTestBean> collector) throws Exception {
                         String lastDate = lastDateState.value();
-                        String todayDate = DateFormatUtil.tsToDate(dwsExaminationPaperTestBean.getTs());
+                        String todayDate = DateFormatUtil.tsToDate(dwsExaminationPaperScoreLevelTestBean.getTs());
                         if (StringUtils.isEmpty(lastDate) || !lastDate.equals(todayDate)) {
-                            dwsExaminationPaperTestBean.setUserCt(1L);
+                            dwsExaminationPaperScoreLevelTestBean.setUserCt(1L);
                             lastDateState.update(todayDate);
                         }
-                        collector.collect(dwsExaminationPaperTestBean);
+                        collector.collect(dwsExaminationPaperScoreLevelTestBean);
                     }
                 })
-                .keyBy(DwsExaminationPaperTestBean::getPaperId)
+                .keyBy(bean -> bean.getPaperId() + bean.getScoreLevel())
                 .window(TumblingEventTimeWindows.of(Time.seconds(10)))
-                .reduce(new ReduceFunction<DwsExaminationPaperTestBean>() {
+                .reduce(new ReduceFunction<DwsExaminationPaperScoreLevelTestBean>() {
                     @Override
-                    public DwsExaminationPaperTestBean reduce(DwsExaminationPaperTestBean dwsExaminationPaperTestBean, DwsExaminationPaperTestBean t1) throws Exception {
-                        dwsExaminationPaperTestBean.setUserCt(dwsExaminationPaperTestBean.getUserCt() + t1.getUserCt());
-                        dwsExaminationPaperTestBean.setScoreSum(dwsExaminationPaperTestBean.getScoreSum().add(t1.getScoreSum()));
-                        dwsExaminationPaperTestBean.setDurationSum(dwsExaminationPaperTestBean.getDurationSum() + t1.getDurationSum());
-                        return dwsExaminationPaperTestBean;
+                    public DwsExaminationPaperScoreLevelTestBean reduce(DwsExaminationPaperScoreLevelTestBean dwsExaminationPaperScoreLevelTestBean, DwsExaminationPaperScoreLevelTestBean t1) throws Exception {
+                        dwsExaminationPaperScoreLevelTestBean.setUserCt(dwsExaminationPaperScoreLevelTestBean.getUserCt() + t1.getUserCt());
+                        return dwsExaminationPaperScoreLevelTestBean;
                     }
-                }, new WindowFunction<DwsExaminationPaperTestBean, DwsExaminationPaperTestBean, String, TimeWindow>() {
+                }, new WindowFunction<DwsExaminationPaperScoreLevelTestBean, DwsExaminationPaperScoreLevelTestBean, String, TimeWindow>() {
                     @Override
-                    public void apply(String s, TimeWindow timeWindow, Iterable<DwsExaminationPaperTestBean> iterable, Collector<DwsExaminationPaperTestBean> collector) throws Exception {
-                        DwsExaminationPaperTestBean bean = iterable.iterator().next();
+                    public void apply(String s, TimeWindow timeWindow, Iterable<DwsExaminationPaperScoreLevelTestBean> iterable, Collector<DwsExaminationPaperScoreLevelTestBean> collector) throws Exception {
+                        DwsExaminationPaperScoreLevelTestBean bean = iterable.iterator().next();
                         bean.setStt(DateFormatUtil.tsToDateTime(timeWindow.getStart()));
                         bean.setEdt(DateFormatUtil.tsToDateTime(timeWindow.getEnd()));
                         bean.setCurDate(DateFormatUtil.tsToDate(timeWindow.getStart()));
@@ -98,7 +97,7 @@ public class DwsExaminationPaperTestWindow {
                     }
                 })
                 .map(new BeanToJsonStrMapFunction<>())
-                .sinkTo(FlinkDorisUtil.getDorisSink(Constant.DWS_EXAMINATION_PAPER_TEST_WINDOW));
+                .sinkTo(FlinkDorisUtil.getDorisSink(Constant.DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW));
         env.execute();
     }
 }

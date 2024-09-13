@@ -7,7 +7,9 @@
     <modules>
         <module>realtime-dws-interaction-course-review-window</module>
         <module>realtime-dws-examination-paper-test-window</module>
+        <module>realtime-dws-examination-question-test-window</module>
         <module>realtime-dws-examination-course-test-window</module>
+        <module>realtime-dws-examination-paper-score-level-test-window</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>
