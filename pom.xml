@@ -13,8 +13,6 @@
         <module>realtime-dim</module>
         <module>realtime-dwd</module>
         <module>realtime-dws</module>
-        <module>realtime-dws/realtime-dws-user-login-info-window</module>
-        <module>realtime-dwd/realtime-dwd-trade-order-info</module>
     </modules>
 
     <properties>

@@ -9,7 +9,6 @@ public class Constant {
     public static final String TOPIC_PAGE_TAG = "pageTag";
     public static final String TOPIC_APP_VIDEO = "appVideo";
 
-    public static final String TOPIC_START_TAG = "topic_start_tag";
     public static final String TOPIC_DWD_TRAFFIC_PAGE = "topic_dwd_traffic_page";
 
     public static final String DORIS_FE_NODES = "8.130.101.83:7030";//hadoop107:7030  localhost:10000    8.130.101.83:7030
@@ -50,7 +49,6 @@ public class Constant {
 
     public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
 
-    public static final String TOPIC_PAGE_TAG = "pageTag";
-    public static final String TOPIC_APP_VIDEO = "appVideo";
+
 }
 
