@@ -9,6 +9,8 @@ public class Constant {
     public static final String TOPIC_PAGE_TAG = "pageTag";
     public static final String TOPIC_APP_VIDEO = "appVideo";
 
+    public static final String TOPIC_START_TAG = "topic_start_tag";
+    public static final String TOPIC_DWD_TRAFFIC_PAGE = "topic_dwd_traffic_page";
 
     public static final String DORIS_FE_NODES = "8.130.101.83:7030";//hadoop107:7030  localhost:10000    8.130.101.83:7030
     public static final String DORIS_DATABASE = "educate_realtime";
@@ -29,25 +31,26 @@ public class Constant {
 
     public static final String DWD_INTERACTION_REVIEW_INFO = "dwd_interaction_review_info";
 
+    public static final String DWD_USER_LOGIN_INFO = "dwd_user_login_info";
+
     public static final String DWD_EXAMINATION_TEST_EXAM_QUESTION = "dwd_examination_test_exam_question";
-    public static final String DWD_USER_LOGIN_INFO = "dws_user_login_info";
-    public static final String TOPIC_DWD_TRADE_ORDER_INFO = "dwd_trade_order_info";
 
     public static final String TOPIC_DWD_TRADE_CART_ADD = "dwd_trade_cart_add";
 
     public static final String TOPIC_DWD_TRADE_ORDER_DETAIL = "dwd_trade_order_detail";
 
+    public static final String DWS_COURSE_COURSE_ORDER_WINDOW = "dws_course_course_order_window";
+
     public static final String TOPIC_DWD_TRADE_ORDER_PAYMENT_SUCCESS = "dwd_trade_order_payment_success";
 
     public static final String DWS_EXAMINATION_PAPER_TEST_WINDOW = "dws_examination_paper_test_window";
-
+    public static final String DWS_INTERACTION_COURSE_REVIEW_WINDOW = "dws_interaction_course_review_window";
     public static final String DWS_EXAMINATION_COURSE_TEST_WINDOW = "dws_examination_course_test_window";
+    public static final String DWS_EXAMINATION_QUESTION_TEST_WINDOW = "dws_examination_question_test_window";
 
     public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
 
-    public static final String DWS_USER_PAGE_WINDOW = "dws_user_page_window";
-
-    public static final String DWS_COURSE_COURSE_ORDER_WINDOW = "dws_course_course_order_window";
-
+    public static final String TOPIC_PAGE_TAG = "pageTag";
+    public static final String TOPIC_APP_VIDEO = "appVideo";
 }
 

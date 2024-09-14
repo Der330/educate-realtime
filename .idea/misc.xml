@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MaterialThemeProjectNewConfig">
@@ -13,19 +14,20 @@
         <option value="$PROJECT_DIR$/realtime-common/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dim/pom.xml" />
-        <option value="$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-interaction-review-info/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-examination-test-exam-question/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dwd/realtime-dwd-user-logininfo/pom.xml" />
-        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-is_new-page-view-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-course-course-order-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-course-test-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-paper-score-level-test-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-paper-test-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-examination-question-test-window/pom.xml" />
-        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-winwod/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-user-page-window/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-ads/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-is_new-page-view-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-video-chapter-play-window/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-winwod/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

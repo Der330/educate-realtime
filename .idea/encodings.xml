@@ -7,12 +7,12 @@
     <file url="file://$PROJECT_DIR$/realtime-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dim/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dim/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/realtime-dwd/com.atguigu.edu.realtime.dwd.log.split.app/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-examination-test-exam-question/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-examination-test-exam-question/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-interaction-review-info/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-interaction-review-info/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-log/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-log/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-trade-comment-into/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-trade-comment-into/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dwd/realtime-dwd-trade-order-detail/src/main/java" charset="UTF-8" />
@@ -37,12 +37,14 @@
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-interaction-course-review-window/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-is_new-page-view-window/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-is_new-page-view-window/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-winwod/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-winwod/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-window/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-traffic-source-keyword-page-view-window/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-user-login-info-window/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-user-login-info-window/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-user-page-window/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-user-page-window/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-video-chapter-play-window/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/realtime-dws/realtime-dws-video-chapter-play-window/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/realtime-dws/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
