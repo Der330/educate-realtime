@@ -74,7 +74,7 @@ public class HbaseUtil {
             }
 
             if (colFamilys.length<1){
-                new RuntimeException("[CREATE HBASE ERROR]--列族不能为空");
+                System.out.println("[CREATE HBASE ERROR]--列族不能为空");
             }
 
             TableDescriptorBuilder descriptorBuilder=TableDescriptorBuilder.newBuilder(tableNameObj);
@@ -86,7 +86,7 @@ public class HbaseUtil {
             System.out.println("Hbase表["+nameSpace+"."+tableName+"]创建成功");
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+
         }
 
     }

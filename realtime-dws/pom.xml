@@ -10,6 +10,7 @@
         <module>realtime-dws-examination-question-test-window</module>
         <module>realtime-dws-examination-course-test-window</module>
         <module>realtime-dws-examination-paper-score-level-test-window</module>
+        <module>realtime-dws-user-login-info-window</module>
         <module>realtime-dws-user-page-window</module>
         <module>realtime-dws-course-course-order-window</module>
         <module>realtime-dws-traffic-is_new-page-view-window</module>

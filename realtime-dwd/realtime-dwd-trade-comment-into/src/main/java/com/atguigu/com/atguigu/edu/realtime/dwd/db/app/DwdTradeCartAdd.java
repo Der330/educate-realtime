@@ -9,6 +9,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 public class DwdTradeCartAdd extends BaseSQLApp {
     public static void main(String[] args) {
+
         new DwdTradeCartAdd().start(10013, 4, Constant.TOPIC_DWD_TRADE_CART_ADD);
     }
 
@@ -16,7 +17,7 @@ public class DwdTradeCartAdd extends BaseSQLApp {
     public void handle(StreamExecutionEnvironment env, StreamTableEnvironment tableEnv) {
         // todo 1 从topic_db主题读取数据
         readOdsDb(tableEnv, Constant.TOPIC_DWD_TRADE_CART_ADD);
-        // tableEnv.executeSql("select `data` from topic_db").print();
+//         tableEnv.executeSql("select `data` from topic_db").print();
 
         // TODO 2.过滤出加购行为
         Table cartInfo = tableEnv.sqlQuery("select \n" +
@@ -29,9 +30,10 @@ public class DwdTradeCartAdd extends BaseSQLApp {
                 " `data`['sold'] sold ,\n" +
                 " ts \n" +
                 " from topic_db\n" +
-                " where `type` ='insert' and `table` ='cart_info' and `database` ='edu' and `data`['sold']='1'");
-        // cartInfo.execute().print();
-        tableEnv.createTemporaryView("cart_info",cartInfo);
+                " where `type` ='insert' and `table` ='cart_info' and `database` ='edu'");
+
+        tableEnv.createTemporaryView("cartinfo",cartInfo);
+//        tableEnv.executeSql("select * from cartinfo").print();
         // TODO 3.将加购数据写到kafka主题
         tableEnv.executeSql("CREATE TABLE "+Constant.TOPIC_DWD_TRADE_CART_ADD+" (\n" +
                 "    id string,\n" +
@@ -45,9 +47,9 @@ public class DwdTradeCartAdd extends BaseSQLApp {
                 "    PRIMARY KEY (id) NOT ENFORCED\n" +
                 ") " + SqlUtil.getUpsertKafkaDDL(Constant.TOPIC_DWD_TRADE_CART_ADD));
 
-        tableEnv.executeSql("select * from dwd_trade_cart_add").print();
 
         //3.2 写入2
-        tableEnv.executeSql("insert into "+Constant.TOPIC_DWD_TRADE_CART_ADD+" select * from cart_info");
+        cartInfo.executeInsert(Constant.TOPIC_DWD_TRADE_CART_ADD);
+
     }
 }
