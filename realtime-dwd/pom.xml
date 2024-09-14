@@ -20,6 +20,7 @@
         <module>realtime-dwd-trade-order-detail</module>
         <module>realtime-dwd-trade-order-pay-suc-detail</module>
         <module>realtime-dwd-log</module>
+        <module>realtime-dwd-trade-order-info</module>
     </modules>
 
     <properties>
