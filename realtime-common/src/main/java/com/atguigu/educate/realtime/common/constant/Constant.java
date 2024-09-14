@@ -44,6 +44,7 @@ public class Constant {
     public static final String DWS_EXAMINATION_QUESTION_TEST_WINDOW = "dws_examination_question_test_window";
 
     public static final String DWS_EXAMINATION_PAPER_SCORE_LEVEL_TEST_WINDOW = "dws_examination_paper_score_level_test_window";
+    public static final String DWS_VIDEO_CHAPTER_PLAY_WINDOW = "dws_video_chapter_play_window";
 
     public static final String TOPIC_PAGE_TAG = "pageTag";
     public static final String TOPIC_APP_VIDEO = "appVideo";

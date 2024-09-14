@@ -12,6 +12,8 @@
         <module>realtime-dws-examination-paper-score-level-test-window</module>
         <module>realtime-dws-user-page-window</module>
         <module>realtime-dws-course-course-order-window</module>
+        <module>realtime-dws-video-chapter-play-window</module>
+        <module>realtime-dws-user-login-info-window</module>
     </modules>
     <parent>
         <groupId>com.atguigu</groupId>

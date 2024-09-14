@@ -1,4 +1,3 @@
-/*
 package com.atguigu.edu.realtime.dws.app;
 
 import com.alibaba.fastjson.JSON;
@@ -33,22 +32,22 @@ import org.apache.flink.util.Collector;
 import java.util.concurrent.TimeUnit;
 
 public class DwsVideoChapterPlayWindow {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = FlinkEnvUtil.getEnv(10101, 4);
-        SingleOutputStreamOperator<DwsVideoChapterPlayWindowBean> processDS = env.fromSource(FlinkKafkaUtil.getKafkaSource("appVideo", Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW)
-                        , WatermarkStrategy.noWatermarks(), Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW)
+        SingleOutputStreamOperator<DwsVideoChapterPlayWindowBean> processDS = env.fromSource(FlinkKafkaUtil.getKafkaSource("appVideo", Constant.DWS_VIDEO_CHAPTER_PLAY_WINDOW)
+                        , WatermarkStrategy.noWatermarks(), Constant.DWS_VIDEO_CHAPTER_PLAY_WINDOW)
                 .process(new ProcessFunction<String, DwsVideoChapterPlayWindowBean>() {
                     @Override
                     public void processElement(String s, ProcessFunction<String, DwsVideoChapterPlayWindowBean>.Context context, Collector<DwsVideoChapterPlayWindowBean> collector) throws Exception {
                         if (StringUtils.isNotEmpty(s)) {
                             JSONObject jsonObj = JSON.parseObject(s);
                             collector.collect(DwsVideoChapterPlayWindowBean.builder()
-                                    .userId(jsonObj.getString("user_id"))
-                                    .paperId(jsonObj.getString("paper_id"))
-                                    .scoreSum(jsonObj.getBigDecimal("exam_score"))
-                                    .durationSum(jsonObj.getLong("exam_duration_sec"))
+                                    .videoId(jsonObj.getJSONObject("appVideo").getString("video_id"))
+                                    .mid(jsonObj.getJSONObject("common").getString("mid"))
+                                    .playCt(jsonObj.getJSONObject("appVideo").getLong("play_sec") < 30 ? 1L : 0L)
+                                    .playDuration(jsonObj.getJSONObject("appVideo").getLong("play_sec"))
                                     .ts(jsonObj.getLong("ts") * 1000)
-                                    .UserCt(0L)
+                                    .playUserCt(0L)
                                     .build());
                         }
                     }
@@ -56,17 +55,17 @@ public class DwsVideoChapterPlayWindow {
         SingleOutputStreamOperator<DwsVideoChapterPlayWindowBean> reduceDS = AsyncDataStream.unorderedWait(processDS, new DimAsyncFunction<DwsVideoChapterPlayWindowBean>() {
                     @Override
                     public void addDims(DwsVideoChapterPlayWindowBean dwsVideoChapterPlayWindowBean, JSONObject jsonObj) {
-                        dwsVideoChapterPlayWindowBean.setCourseId(jsonObj.getString("course_id"));
+                        dwsVideoChapterPlayWindowBean.setChapterId(jsonObj.getString("chapter_id"));
                     }
 
                     @Override
                     public String getTableName() {
-                        return "dim_test_paper";
+                        return "dim_video_info";
                     }
 
                     @Override
                     public String getRowKey(DwsVideoChapterPlayWindowBean dwsVideoChapterPlayWindowBean) {
-                        return dwsVideoChapterPlayWindowBean.getPaperId();
+                        return dwsVideoChapterPlayWindowBean.getVideoId();
                     }
                 }, 60, TimeUnit.SECONDS)
                 .assignTimestampsAndWatermarks(WatermarkStrategy.<DwsVideoChapterPlayWindowBean>forMonotonousTimestamps()
@@ -76,7 +75,7 @@ public class DwsVideoChapterPlayWindow {
                                 return dwsVideoChapterPlayWindowBean.getTs();
                             }
                         }))
-                .keyBy(bean -> bean.getUserId() + bean.getCourseId())
+                .keyBy(bean -> bean.getMid() + bean.getChapterId())
                 .process(new KeyedProcessFunction<String, DwsVideoChapterPlayWindowBean, DwsVideoChapterPlayWindowBean>() {
                     ValueState<String> lastDateState;
 
@@ -92,20 +91,20 @@ public class DwsVideoChapterPlayWindow {
                         String lastDate = lastDateState.value();
                         String todayDate = DateFormatUtil.tsToDate(dwsVideoChapterPlayWindowBean.getTs());
                         if (StringUtils.isEmpty(lastDate) || !lastDate.equals(todayDate)) {
-                            dwsVideoChapterPlayWindowBean.setUserCt(1L);
+                            dwsVideoChapterPlayWindowBean.setPlayUserCt(1L);
                             lastDateState.update(todayDate);
                         }
                         collector.collect(dwsVideoChapterPlayWindowBean);
                     }
                 })
-                .keyBy(DwsVideoChapterPlayWindowBean::getCourseId)
+                .keyBy(DwsVideoChapterPlayWindowBean::getChapterId)
                 .window(TumblingEventTimeWindows.of(Time.seconds(10)))
                 .reduce(new ReduceFunction<DwsVideoChapterPlayWindowBean>() {
                     @Override
                     public DwsVideoChapterPlayWindowBean reduce(DwsVideoChapterPlayWindowBean dwsVideoChapterPlayWindowBean, DwsVideoChapterPlayWindowBean t1) throws Exception {
-                        dwsVideoChapterPlayWindowBean.setUserCt(dwsVideoChapterPlayWindowBean.getUserCt() + t1.getUserCt());
-                        dwsVideoChapterPlayWindowBean.setScoreSum(dwsVideoChapterPlayWindowBean.getScoreSum().add(t1.getScoreSum()));
-                        dwsVideoChapterPlayWindowBean.setDurationSum(dwsVideoChapterPlayWindowBean.getDurationSum() + t1.getDurationSum());
+                        dwsVideoChapterPlayWindowBean.setPlayCt(dwsVideoChapterPlayWindowBean.getPlayCt() + t1.getPlayCt());
+                        dwsVideoChapterPlayWindowBean.setPlayDuration(dwsVideoChapterPlayWindowBean.getPlayDuration() + t1.getPlayDuration());
+                        dwsVideoChapterPlayWindowBean.setPlayUserCt(dwsVideoChapterPlayWindowBean.getPlayUserCt() + t1.getPlayUserCt());
                         return dwsVideoChapterPlayWindowBean;
                     }
                 }, new WindowFunction<DwsVideoChapterPlayWindowBean, DwsVideoChapterPlayWindowBean, String, TimeWindow>() {
@@ -123,22 +122,21 @@ public class DwsVideoChapterPlayWindow {
                         new DimAsyncFunction<DwsVideoChapterPlayWindowBean>() {
                             @Override
                             public void addDims(DwsVideoChapterPlayWindowBean dwsVideoChapterPlayWindowBean, JSONObject jsonObj) {
-                                dwsVideoChapterPlayWindowBean.setCourseName(jsonObj.getString("course_name"));
+                                dwsVideoChapterPlayWindowBean.setChapterName(jsonObj.getString("chapter_name"));
                             }
 
                             @Override
                             public String getTableName() {
-                                return "dim_course_info";
+                                return "chapter_info";
                             }
 
                             @Override
                             public String getRowKey(DwsVideoChapterPlayWindowBean dwsVideoChapterPlayWindowBean) {
-                                return dwsVideoChapterPlayWindowBean.getCourseId();
+                                return dwsVideoChapterPlayWindowBean.getChapterId();
                             }
                         }, 60, TimeUnit.SECONDS)
                 .map(new BeanToJsonStrMapFunction<>())
-                .sinkTo(FlinkDorisUtil.getDorisSink(Constant.DWS_EXAMINATION_COURSE_TEST_WINDOW));
+                .sinkTo(FlinkDorisUtil.getDorisSink(Constant.DWS_VIDEO_CHAPTER_PLAY_WINDOW));
         env.execute();
     }
 }
-*/
