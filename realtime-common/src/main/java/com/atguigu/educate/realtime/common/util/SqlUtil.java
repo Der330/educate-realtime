@@ -15,6 +15,8 @@ public class SqlUtil {
                 //"  'scan.startup.mode' = 'earliest-offset',\n" +
                 "  'format' = 'json'\n" +
                 ")";
+
+
         return sql;
     }
 
@@ -93,7 +95,7 @@ public class SqlUtil {
                 "  'topic' = '"+ topic +"',\n" +
                 "  'properties.bootstrap.servers' = '" + Constant.KAFKA_BROKERS + "',\n" +
                 "  'properties.group.id' = '" + groupId +"',\n" +
-                "  'scan.startup.mode' = 'earliest-offset',\n" +
+                "  'scan.startup.mode' = 'latest-offset',\n" +
                 //     "  'properties.auto.offset.reset' = 'latest'\n" +
                 "  'format' = 'json'\n" +
                 ")";
@@ -122,17 +124,6 @@ public class SqlUtil {
                 ")";
     }
 
-    public static String getDorisDDL(String tableName){
-        return "WITH (" +
-                "  'connector' = 'doris', " +
-                "  'fenodes' = '" + Constant.DORIS_FE_NODES + "', " +
-                "  'table.identifier' = '" + Constant.DORIS_DATABASE + "."  + tableName +"', " +
-                "  'username' = 'root', " +
-                "  'password' = 'aaaaaa', " +
-                "  'sink.properties.format' = 'json', " +
-                "  'sink.enable-2pc' = 'false' " + // 测试阶段可以关闭两阶段提交,方便测试
-                ") " ;
-    }
 
 
 

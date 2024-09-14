@@ -10,7 +10,7 @@ import lombok.Data;
 public class DwsUserPageBean {
     String stt;
     String edt;
-    String currDate;
+    String curDate;
     Long homeViewCount;
     Long detailViewCount;
     Long addCarCount;
@@ -27,5 +27,17 @@ public class DwsUserPageBean {
         this.setAddCarCount(0L);
         this.setDoOrderCount(0L);
         this.setPaySucCount(0L);
+    }
+
+    @JSONField(serialize = false)
+    public DwsUserPageBean add(DwsUserPageBean value){
+
+        this.setHomeViewCount(this.getHomeViewCount()+ value.getHomeViewCount());
+        this.setDetailViewCount(this.getDetailViewCount()+value.getDetailViewCount());
+        this.setAddCarCount(this.getAddCarCount()+ value.getAddCarCount());
+        this.setDoOrderCount(this.getDoOrderCount()+value.getDoOrderCount());
+        this.setPaySucCount(this.getPaySucCount()+ value.getPaySucCount());
+
+        return this;
     }
 }

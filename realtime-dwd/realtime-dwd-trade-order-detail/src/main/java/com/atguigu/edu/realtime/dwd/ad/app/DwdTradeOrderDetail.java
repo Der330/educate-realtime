@@ -1,8 +1,7 @@
-package com.atguigu.com.atguigu.edu.realtime.dwd.ad.app;
+package com.atguigu.edu.realtime.dwd.ad.app;
 
 import com.atguigu.educate.realtime.common.base.BaseSQLApp;
 import com.atguigu.educate.realtime.common.constant.Constant;
-import com.atguigu.educate.realtime.common.util.SqlUtil;
 import com.atguigu.educate.realtime.common.util.SqlUtil;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
